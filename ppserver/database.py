@@ -16,7 +16,7 @@ from ppserver.log import logger
 cache = Cache("data")
 
 
-@cache.memoize(expire=3600)
+@cache.memoize(expire=1)
 def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
     scope = [
         "https://spreadsheets.google.com/feeds",
