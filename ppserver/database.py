@@ -12,7 +12,6 @@ from diskcache import Cache
 
 # ours
 
-from ppserver.dot import df_to_dot
 from ppserver.log import logger
 
 cache = Cache("data")
@@ -48,7 +47,16 @@ class DataBase:
         logger.info("Database initialized")
 
     def get_dot_string(self) -> str:
-        return df_to_dot(self._relations_df)
+        out = "digraph G{\n"
+        for row in self._relations_df.iterrows():
+            index, values = row
+            actor, target, action = values.to_list()
+            out += f'{actor} -> {target} [label="{action}"]\n'
+        out += "}"
+        return out
+
+    def get_persons_table_html(self) -> str:
+        return self._persons_df[["Name", "Description"]].to_html(classes=["data"], index=False)
 
 
 if __name__ == "__main__":

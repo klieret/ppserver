@@ -34,7 +34,8 @@ def root():
     return render_template(
         "default.html",
         dotgraph=db.get_dot_string(),
-        js_path=str(Path("static") / get_vis_js().relative_to(statics))
+        js_path=str(Path("static") / get_vis_js().relative_to(statics)),
+        persons_table=db.get_persons_table_html(),
     )
 
 
