@@ -33,11 +33,11 @@ def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
     logger.debug("Authorization granted")
     ret = []
     for name in names:
-        logger.debug(f"Fetching {name} from google")
+        logger.debug("Fetching {name} from google".format(name=name))
         wks = gc.open(name).get_worksheet(0)
         data = wks.get_all_values()
         ret.append(pd.DataFrame(data=data[1:], columns=data[0]))
-        logger.debug(f"Done fetching {name} from google")
+        logger.debug("Done fetching {name} from google".format(name=name))
     return ret
 
 
@@ -79,7 +79,7 @@ class DataBase:
 
     def dot_node_for_person(self, key: str):
         person = self.get_person(key)
-        return f'{key} [title="{person.normalized_description}",label="{person.name}"]\n'
+        return '{key} [title="{description}",label="{label}"]\n'.format(key=key, description=person.normalized_description, label=person.name)
 
     def get_dot_string(self) -> str:
         out = "digraph G{\n"
@@ -93,7 +93,7 @@ class DataBase:
             if target not in nodes_added:
                 out += self.dot_node_for_person(target)
                 nodes_added.append(target)
-            out += f'"{actor}" -> "{target}" [label="{action}"]\n'
+            out += '"{actor}" -> "{target}" [label="{action}"]\n'.format(actor=actor, target=target, action=action)
         out += "}"
         logger.debug(out)
         return out
@@ -105,7 +105,7 @@ class DataBase:
         try:
             return self._key2info[key]
         except KeyError:
-            logger.warning(f"Don't have record about {key}")
+            logger.warning("Don't have record about {key}".format(key=key))
             return Person(name=key)
 
 

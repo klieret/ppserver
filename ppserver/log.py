@@ -82,7 +82,7 @@ def add_log_fh(basedir: Union[str, PurePath], log: OL = None) -> None:
     else:
         setattr(logger, _ADD_LOG_FH_PROPERTY, log_fh_prop + [basedir])
 
-    logger.info(f"Log files will be written to {basedir.resolve()}.")
+    # logger.info(f"Log files will be written to {basedir.resolve()}.")
 
     formatter = logging.Formatter("%(levelname)s %(asctime)s: %(message)s")
 
