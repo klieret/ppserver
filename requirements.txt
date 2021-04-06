@@ -1,5 +1,5 @@
 flask
-pandas
+pandas>0.22.0
 gspread
 colorlog
 diskcache
