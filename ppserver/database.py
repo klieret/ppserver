@@ -79,10 +79,7 @@ class DataBase:
 
     def dot_node_for_person(self, key: str):
         person = self.get_person(key)
-        if person.normalized_description:
-            return f'{key} [title="{person.normalized_description}", label="{person.name}"]\n'
-        else:
-            return ""
+        return f'{key} [title="{person.normalized_description}",label="{person.name}"]\n'
 
     def get_dot_string(self) -> str:
         out = "digraph G{\n"
@@ -102,7 +99,7 @@ class DataBase:
         return out
 
     def get_persons_table_html(self) -> str:
-        return self._persons_df[["Name", "Description"]].sort_values("Name").to_html(classes=["data"], index=False)
+        return self._persons_df[["Name", "Description"]].sort_values("Name").to_html(classes=["datatable"], index=False)
 
     def get_person(self, key):
         try:

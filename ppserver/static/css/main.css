@@ -1,1 +1,51 @@
-.vis-network: {overflow:visible;}
+.vis-network {
+  overflow:visible;
+}
+
+
+.center {
+  margin: auto;
+}
+
+.datatable {
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    table-layout: fixed;
+    width: 80%;
+    max-width: 800px;
+    border: none;
+}
+
+.datatable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.datatable th,
+.datatable td {
+    padding: 12px 15px;
+  border: none;
+}
+
+.datatable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.datatable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.datatable tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.data tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
