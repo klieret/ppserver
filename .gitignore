@@ -1,3 +1,4 @@
 *private*
 *.pyc
 **/__pycache__/**
+*.egg-info/**

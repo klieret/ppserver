@@ -9,6 +9,8 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+# ours
+from ppserver.dot import df_to_dot
 
 def load_from_google(name: str) -> pd.DataFrame:
     scope = [
@@ -30,9 +32,13 @@ def load_from_google(name: str) -> pd.DataFrame:
 
 class DataBase:
     def __init__(self):
-        self.relations_df: pd.DataFrame = load_from_google("characters")
-        self.persons_df: pd.DataFrame = load_from_google("relations")
+        self._relations_df: pd.DataFrame = load_from_google("characters")
+        self._persons_df: pd.DataFrame = load_from_google("relations")
+
+    def get_dot_string(self) -> str:
+        return df_to_dot(self._relations_df)
 
 
 if __name__ == "__main__":
     db = DataBase()
+    db.get_dot_string()
