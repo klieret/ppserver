@@ -51,12 +51,13 @@
     color: #009879;
 }
 
- /* The alert message box */
+
 .info {
-  padding: 20px;
-  background-color: #009879; /* Red */
-  color: white;
-  margin-bottom: 15px;
+    padding: 20px;
+    background-color: #009879;
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .info a {
