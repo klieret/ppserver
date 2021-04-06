@@ -41,7 +41,7 @@ def root():
 
 def main():
     app.logger.setLevel(logging.DEBUG)
-    app.run()
+    app.run(port=6149)
 
 
 if __name__ == "__main__":

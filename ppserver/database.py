@@ -7,7 +7,6 @@ from pathlib import Path
 # 3rd
 import pandas as pd
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from diskcache import Cache
 
 # ours
@@ -24,12 +23,10 @@ def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
         "https://www.googleapis.com/auth/drive",
     ]
 
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(
-        Path(__file__).parent / "../private_data/pen-and-paper-309915-e61473bc4e7a.json", scope
-    )
-
     logger.debug("Authorizing to google")
-    gc = gspread.authorize(credentials)
+
+    gc = gspread.service_account(filename=Path(__file__).parent / "../private_data/pen-and-paper-309915-e61473bc4e7a.json")
+
     logger.debug("Authorization granted")
     ret = []
     for name in names:
