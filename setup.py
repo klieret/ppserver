@@ -28,7 +28,7 @@ with (this_dir / "requirements.txt").open() as rf:
 
 
 setup(
-    name="sksurvey",
+    name="ppserver",
     packages=packages,
     install_requires=requirements,
     url="",
