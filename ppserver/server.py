@@ -9,6 +9,8 @@ import json
 from flask import Flask
 from flask import render_template, redirect, send_file, request
 
+# ours
+from ppserver.database import DataBase
 
 
 templates = Path(__file__).resolve().parent / "templates"
@@ -20,10 +22,6 @@ app = Flask(
 )
 
 
-def get_relations_dot_string() -> str:
-    return Path("/home/fuchur/Documents/21/git_sync/ppdata/relations.dot").read_text()
-
-
 def get_vis_js() -> Path:
     p = statics / "js" / "vis-network.min.js"
     assert p.is_file(), p
@@ -32,9 +30,10 @@ def get_vis_js() -> Path:
 
 @app.route("/")
 def root():
+    db = DataBase()
     return render_template(
         "default.html",
-        dotgraph=get_relations_dot_string(),
+        dotgraph=db.get_dot_string(),
         js_path=str(Path("static") / get_vis_js().relative_to(statics))
     )
 

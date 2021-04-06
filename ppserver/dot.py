@@ -3,9 +3,10 @@ import pandas as pd
 
 
 def df_to_dot(df: pd.DataFrame) -> str:
-    out = "digraph G{"
+    out = "digraph G{\n"
     for row in df.iterrows():
-        actor, target, action = row
-        out += f'{actor} -> {target} [label="{action}"]'
+        index, values = row
+        actor, target, action = values.to_list()
+        out += f'{actor} -> {target} [label="{action}"]\n'
     out += "}"
     return out
