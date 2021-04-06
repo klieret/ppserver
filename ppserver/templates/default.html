@@ -3,10 +3,11 @@
 <head>
   <title>Zettelkasten</title>
   <script src="{{js_path}}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body  style="height: 100%;">
 
-<div id="mynetwork" style="width: 100%; height: 70%;"></div>
+<div id="mynetwork" style="width: 100%; height: 70%;" class="vis-network"></div>
 <div id="persons">{{persons_table|safe}}</div>
 
 <script type="text/javascript">

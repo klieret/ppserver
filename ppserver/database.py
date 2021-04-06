@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # std
-from typing import Optional, Tuple, List
+from typing import Optional, Tuple, List, NamedTuple, Dict
 from pathlib import Path
 
 # 3rd
@@ -41,22 +41,75 @@ def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
     return ret
 
 
+class Person:
+    def __init__(self, name: str, description: str = "", alive=True, location: str = "", appeared: str = ""):
+        self.name = name
+        self.description = description
+        self.alive = alive
+        self.locations = location.split(",")
+        self.appeared = appeared
+
+    @property
+    def normalized_description(self):
+        return self.description.replace('"','').replace("'","")
+
+
+def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
+    persons = {}
+    print(df.columns)
+    for row in df.iterrows():
+        index, values = row
+        values = values.to_dict()
+        key = values["Key"]
+        persons[key] = Person(
+            name=values["Name"],
+            description=values["Description"],
+            alive=values["Alive"],
+            location=values["Locations"],
+            appeared = values["Appeared"]
+        )
+    return persons
+
+
 class DataBase:
     def __init__(self):
         self._relations_df, self._persons_df = load_from_google(("relations", "characters"))
         logger.info("Database initialized")
+        self._key2info = df_to_persons(self._persons_df)
+
+    def dot_node_for_person(self, key: str):
+        person = self.get_person(key)
+        if person.normalized_description:
+            return f'{key} [title="{person.normalized_description}", label="{person.name}"]\n'
+        else:
+            return ""
 
     def get_dot_string(self) -> str:
         out = "digraph G{\n"
+        nodes_added = []
         for row in self._relations_df.iterrows():
             index, values = row
             actor, target, action = values.to_list()
-            out += f'{actor} -> {target} [label="{action}"]\n'
+            if actor not in nodes_added:
+                out += self.dot_node_for_person(actor)
+                nodes_added.append(actor)
+            if target not in nodes_added:
+                out += self.dot_node_for_person(target)
+                nodes_added.append(target)
+            out += f'"{actor}" -> "{target}" [label="{action}"]\n'
         out += "}"
+        logger.debug(out)
         return out
 
     def get_persons_table_html(self) -> str:
-        return self._persons_df[["Name", "Description"]].to_html(classes=["data"], index=False)
+        return self._persons_df[["Name", "Description"]].sort_values("Name").to_html(classes=["data"], index=False)
+
+    def get_person(self, key):
+        try:
+            return self._key2info[key]
+        except KeyError:
+            logger.warning(f"Don't have record about {key}")
+            return Person(name=key)
 
 
 if __name__ == "__main__":
