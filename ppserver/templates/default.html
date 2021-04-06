@@ -14,7 +14,10 @@
   let container = document.getElementById('mynetwork');
   let dot = `{{dotgraph | safe}}`;
   let data = vis.parseDOTNetwork(dot);
-  let network = new vis.Network(container, data);
+  let options = {
+    clickToUse: true,
+  }
+  let network = new vis.Network(container, data, options);
 </script>
 
 </body>
