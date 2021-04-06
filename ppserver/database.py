@@ -24,8 +24,9 @@ def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
     ]
 
     logger.debug("Authorizing to google")
-
-    gc = gspread.service_account(filename=Path(__file__).parent / "../private_data/pen-and-paper-309915-e61473bc4e7a.json")
+    filename = Path(__file__).parent / "../private_data/pen-and-paper-309915-e61473bc4e7a.json"
+    assert filename.is_file()
+    gc = gspread.service_account(filename=str(filename.resolve()))
 
     logger.debug("Authorization granted")
     ret = []
@@ -83,7 +84,7 @@ class DataBase:
         nodes_added = []
         for row in self._relations_df.iterrows():
             index, values = row
-            actor, target, action = values.to_list()
+            actor, action, target = list(values)
             if actor not in nodes_added:
                 out += self.dot_node_for_person(actor)
                 nodes_added.append(actor)
