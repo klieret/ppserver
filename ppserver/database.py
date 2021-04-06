@@ -3,6 +3,7 @@
 # std
 from typing import Optional, Tuple, List, NamedTuple, Dict
 from pathlib import Path
+from datetime import datetime
 
 # 3rd
 import pandas as pd
@@ -16,7 +17,7 @@ from ppserver.log import logger
 cache = Cache("data")
 
 
-@cache.memoize(expire=1)
+@cache.memoize()
 def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
     scope = [
         "https://spreadsheets.google.com/feeds",
@@ -71,9 +72,16 @@ def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
 
 class DataBase:
     def __init__(self):
+        self.reload()
+        self.last_reload = datetime.now()
+
+    def reload(self, force=False):
+        if force:
+            cache.clear()
         self._relations_df, self._persons_df = load_from_google(("relations", "characters"))
-        logger.info("Database initialized")
         self._key2info = df_to_persons(self._persons_df)
+        if force:
+            self.last_reload = datetime.now()
 
     def dot_node_for_person(self, key: str):
         person = self.get_person(key)
