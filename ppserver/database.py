@@ -89,6 +89,8 @@ class DataBase:
 
     def get_dot_string(self) -> str:
         out = "digraph G{\n"
+        out += "node [style=filled,shape=box,color=#009879,fillcolor=#8DE2D1,fontcolor=black]\n"
+        out += "edge [color=black]"
         nodes_added = []
         for row in self._relations_df.iterrows():
             index, values = row
