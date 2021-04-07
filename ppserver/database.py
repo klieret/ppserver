@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # std
-from typing import Optional, Tuple, List, NamedTuple, Dict
+from typing import Tuple, List, Dict
 from pathlib import Path
 from datetime import datetime
 
@@ -19,11 +19,6 @@ cache = Cache("data")
 
 @cache.memoize()
 def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
-    scope = [
-        "https://spreadsheets.google.com/feeds",
-        "https://www.googleapis.com/auth/drive",
-    ]
-
     logger.debug("Authorizing to google")
     filename = Path(__file__).parent / "../private_data/pen-and-paper-309915-e61473bc4e7a.json"
     assert filename.is_file()
@@ -60,6 +55,8 @@ def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
         index, values = row
         values = values.to_dict()
         key = values["Key"]
+        if key is None:
+            key = values["Name"]
         persons[key] = Person(
             name=values["Name"],
             description=values["Description"],
