@@ -110,7 +110,7 @@ class DataBase:
         return out
 
     def get_persons_table_html(self) -> str:
-        return self._persons_df[["Name", "Description"]].sort_values("Name").to_html(classes=["datatable"], index=False)
+        return self._persons_df[["Name", "Description"]].sort_values("Name").to_html(classes=["datatable"], index=False).replace('style="text-align: right;"', "")
 
     def get_person(self, key):
         try:
