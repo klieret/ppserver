@@ -36,12 +36,14 @@ def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
 
 
 class Person:
-    def __init__(self, name: str, description: str = "", alive=True, location: str = "", appeared: str = ""):
+    def __init__(self, name: str, description: str = "", alive=True, location: str = "", appeared: str = "", is_player=False):
         self.name = name
         self.description = description
         self.alive = alive
         self.locations = location.split(",")
         self.appeared = appeared
+        #: Player or NPC?
+        self.is_player = is_player
 
     @property
     def normalized_description(self):
@@ -55,12 +57,14 @@ def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
         index, values = row
         values = values.to_dict()
         key = values["Name"].lower()
+        keywords = [x.lower() for x in values["Keywords"].split(",")]
         persons[key] = Person(
             name=values["Name"],
             description=values["Description"],
-            alive=values["Alive"],
+            alive="dead" not in keywords,
             location=values["Locations"],
-            appeared = values["Appeared"]
+            appeared=values["Appeared"],
+            is_player="player" in keywords,
         )
     return persons
 
@@ -95,9 +99,11 @@ class DataBase:
             target = values["Target"]
             arrow = "->"
             extra_props = ""
-            extra = values["Extra"]
-            if "bi" in extra:
+            extras = values["Extra"].split(",")
+            if "bi" in extras:
                 arrow = "--"
+            if "?" in extras:
+                extra_props +=",style=dashed"
             if actor not in nodes_added:
                 out += self.dot_node_for_person(actor)
                 nodes_added.append(actor)
