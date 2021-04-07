@@ -121,9 +121,9 @@ class DataBase:
         for row in self._relations_df.iterrows():
             index, values = row
             values = values.to_dict()
-            actor = values["Actor"]
+            actor = values["Actor"].lower()
             action = values["Relation"]
-            target = values["Target"]
+            target = values["Target"].lower()
             arrow = "->"
             extra_props = ""
             extras = values["Extra"].split(",")
