@@ -82,7 +82,7 @@ class DataBase:
 
     def dot_node_for_person(self, key: str):
         person = self.get_person(key)
-        return '{key} [title="{description}",label="{label}"]\n'.format(key=key, description=person.normalized_description, label=person.name)
+        return '"{key}" [title="{description}",label="{label}"]\n'.format(key=key, description=person.normalized_description, label=person.name)
 
     def get_dot_string(self) -> str:
         out = "digraph G{\n"
