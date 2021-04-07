@@ -49,6 +49,13 @@ class Person:
     def normalized_description(self):
         return self.description.replace('"','').replace("'","")
 
+    def get_html_name(self):
+        if not self.alive:
+            return "<del>{name}</del>".format(name=self.name)
+        if self.is_player:
+            return "<b>{name}</b>".format(name=self.name)
+        return self.name
+
 
 def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
     persons = {}
@@ -69,6 +76,17 @@ def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
     return persons
 
 
+def persons_list_to_html(persons: List[Person]) -> str:
+    df = pd.DataFrame()
+
+    df["Name"] = [p.get_html_name() for p in persons]
+    df["_name"] = [p.name for p in persons]
+    df["Description"] = [p.description for p in persons]
+    return df.sort_values("_name")[["Name", "Description"]].to_html(
+        classes=["datatable"], index=False, escape=False).replace(
+        'style="text-align: right;"', "")
+
+
 class DataBase:
     def __init__(self):
         self.reload()
@@ -77,8 +95,8 @@ class DataBase:
     def reload(self, force=False):
         if force:
             cache.clear()
-        self._relations_df, self._persons_df = load_from_google(("relations", "characters"))
-        self._key2info = df_to_persons(self._persons_df)
+        self._relations_df, _persons_df = load_from_google(("relations", "characters"))
+        self._key2info = df_to_persons(_persons_df)
         if force:
             self.last_reload = datetime.now()
 
@@ -116,7 +134,7 @@ class DataBase:
         return out
 
     def get_persons_table_html(self) -> str:
-        return self._persons_df[["Name", "Description"]].sort_values("Name").to_html(classes=["datatable"], index=False).replace('style="text-align: right;"', "")
+        return persons_list_to_html(list(self._key2info.values()))
 
     def get_person(self, key):
         try:
