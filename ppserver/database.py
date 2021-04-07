@@ -54,9 +54,7 @@ def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
     for row in df.iterrows():
         index, values = row
         values = values.to_dict()
-        key = values["Key"].lower()
-        if key is None:
-            key = values["Name"].lower()
+        key = values["Name"].lower()
         persons[key] = Person(
             name=values["Name"],
             description=values["Description"],
@@ -91,13 +89,15 @@ class DataBase:
         nodes_added = []
         for row in self._relations_df.iterrows():
             index, values = row
-            actor, action, target = list(values)[:3]
+            values = values.to_dict()
+            actor = values["Actor"]
+            action = values["Relation"]
+            target = values["Target"]
             arrow = "->"
             extra_props = ""
-            if len(values) == 4:
-                extra = values[3]
-                if "bi" in extra:
-                    arrow = "--"
+            extra = values["Extra"]
+            if "bi" in extra:
+                arrow = "--"
             if actor not in nodes_added:
                 out += self.dot_node_for_person(actor)
                 nodes_added.append(actor)
