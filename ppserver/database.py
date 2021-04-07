@@ -100,6 +100,14 @@ class DataBase:
         if force:
             self.last_reload = datetime.now()
 
+    @property
+    def n_persons(self) -> int:
+        return len(self._key2info)
+
+    @property
+    def n_connections(self) -> int:
+        return len(self._relations_df)
+
     def dot_node_for_person(self, key: str):
         person = self.get_person(key)
         return '"{key}" [title="{description}",label="{label}"]\n'.format(key=key, description=person.normalized_description, label=person.name)

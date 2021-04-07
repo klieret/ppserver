@@ -8,7 +8,8 @@
 <body  style="height: 100%;">
 
 <div class="info">
-  Last reloaded {{not_reloaded_since}}. <a href="/reload">Reload now.</a>
+  Last reloaded {{not_reloaded_since}}. 
+  <a href="/reload">Reload now.</a>
   <a href="https://docs.google.com/spreadsheets/d/1Mgi9Hyjqhz4aov0tt9oi15KAON4kKKnsKBDSMyt-T1I/edit?usp=sharing">Edit relations</a>
   <a href="https://docs.google.com/spreadsheets/d/1N4Mw2q9tKiqbEGW5f1n_G-8cHCTCYbcMDK0Mh3vqu08/edit?usp=sharing">Edit persons</a>
 </div>
@@ -16,6 +17,7 @@
 <div id="mynetwork" style="width: 100%; height: 90%;" class="vis-network"></div>
 
 <div id="persons">{{persons_table|safe}}</div>
+<div id="persons_stats" class="center">This table lists {{n_persons}} characters. There are {{n_connections}} connections shown in the graph above.</div>
 
 <script type="text/javascript">
   let container = document.getElementById('mynetwork');

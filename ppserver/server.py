@@ -39,7 +39,9 @@ def root():
         dotgraph=db.get_dot_string(),
         js_path=str(Path("static") / get_vis_js().relative_to(statics)),
         persons_table=db.get_persons_table_html(),
-        not_reloaded_since=db.last_reload.strftime("%b %d %Y %H:%M:%S")
+        not_reloaded_since=db.last_reload.strftime("%b %d %Y %H:%M:%S"),
+        n_persons=db.n_persons,
+        n_connections=db.n_connections,
     )
 
 

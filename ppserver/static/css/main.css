@@ -65,3 +65,8 @@ a {
     margin-bottom: 15px;
     text-align: center;
 }
+
+#persons_stats {
+    margin-bottom: 15px;
+    color: #a8a8a8;
+}
