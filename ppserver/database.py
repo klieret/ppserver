@@ -54,9 +54,9 @@ def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
     for row in df.iterrows():
         index, values = row
         values = values.to_dict()
-        key = values["Key"]
+        key = values["Key"].lower()
         if key is None:
-            key = values["Name"]
+            key = values["Name"].lower()
         persons[key] = Person(
             name=values["Name"],
             description=values["Description"],
@@ -91,14 +91,20 @@ class DataBase:
         nodes_added = []
         for row in self._relations_df.iterrows():
             index, values = row
-            actor, action, target = list(values)
+            actor, action, target = list(values)[:3]
+            arrow = "->"
+            extra_props = ""
+            if len(values) == 4:
+                extra = values[3]
+                if "bi" in extra:
+                    arrow = "--"
             if actor not in nodes_added:
                 out += self.dot_node_for_person(actor)
                 nodes_added.append(actor)
             if target not in nodes_added:
                 out += self.dot_node_for_person(target)
                 nodes_added.append(target)
-            out += '"{actor}" -> "{target}" [label="{action}"]\n'.format(actor=actor, target=target, action=action)
+            out += '"{actor}" {arrow} "{target}" [label="{action}"{extra_props}]\n'.format(actor=actor, target=target, action=action, arrow=arrow, extra_props=extra_props)
         out += "}"
         logger.debug(out)
         return out
@@ -108,7 +114,7 @@ class DataBase:
 
     def get_person(self, key):
         try:
-            return self._key2info[key]
+            return self._key2info[key.lower()]
         except KeyError:
             logger.warning("Don't have record about {key}".format(key=key))
             return Person(name=key)
