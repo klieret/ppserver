@@ -82,9 +82,10 @@ def persons_list_to_html(persons: List[Person]) -> str:
     df["Name"] = [p.get_html_name() for p in persons]
     df["_name"] = [p.name for p in persons]
     df["Description"] = [p.description for p in persons]
-    return df.sort_values("_name")[["Name", "Description"]].to_html(
-        classes=["datatable"], index=False, escape=False).replace(
-        'style="text-align: right;"', "")
+    with pd.option_context('display.max_colwidth', -1):
+        return df.sort_values("_name")[["Name", "Description"]].to_html(
+            classes=["datatable"], index=False, escape=False).replace(
+            'style="text-align: right;"', "")
 
 
 class DataBase:
