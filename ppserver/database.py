@@ -96,7 +96,12 @@ def persons_list_to_html(persons: List[Person]) -> str:
     with pd.option_context("display.max_colwidth", -1):
         return (
             df.sort_values("_name")[["Name", "Description"]]
-            .to_html(classes=["datatable"], index=False, escape=False)
+            .to_html(
+                classes=["datatable"],
+                index=False,
+                escape=False,
+                table_id="persons_table",
+            )
             .replace('style="text-align: right;"', "")
         )
 

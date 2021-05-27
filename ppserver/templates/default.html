@@ -2,8 +2,11 @@
 <html lang="html" style="height: 100%;">
 <head>
   <title>Pen & Paper</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{{js_path}}"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 </head>
 <body  style="height: 100%;">
 
@@ -29,6 +32,11 @@
   let network = new vis.Network(container, data, options);
 </script>
 
+<script type="text/javascript">
+  $(document).ready( function () {
+    $('#persons_table').DataTable();
+} );
+</script>
 
 
 </body>
