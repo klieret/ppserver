@@ -17,7 +17,7 @@ a {
 
 .personstable_container {
     width: 80%;
-    max-width: 800px;
+    max-width: 1200px;
 }
 
 .personstable {
@@ -28,7 +28,7 @@ a {
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    table-layout: fixed;
+    table-layout: auto !important;
     border: none;
 }
 
