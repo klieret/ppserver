@@ -126,10 +126,9 @@ class DataBase:
 
     def dot_node_for_person(self, key: str):
         person = self.get_person(key)
-        return '"{key}" [title="{description}",label="{label}"]\n'.format(
-            key=key,
-            description=person.normalized_description,
-            label=person.name,
+        return (
+            f'"{key}" [title="{person.normalized_description}",'
+            f'label="{person.name}"]\n'
         )
 
     def get_dot_string(self) -> str:
@@ -160,14 +159,8 @@ class DataBase:
                 out += self.dot_node_for_person(target)
                 nodes_added.append(target)
             out += (
-                '"{actor}" {arrow} "{target}" '
-                '[label="{action}"{extra_props}]\n'.format(
-                    actor=actor,
-                    target=target,
-                    action=action,
-                    arrow=arrow,
-                    extra_props=extra_props,
-                )
+                f'"{actor}" {arrow} "{target}" '
+                f'[label="{action}"{extra_props}]\n'
             )
         out += "}"
         logger.debug(out)
