@@ -67,6 +67,9 @@ class Person:
             return f"<b>{self.name}</b>"
         return self.name
 
+    def get_html_locations(self):
+        return ", ".join([loc.capitalize() for loc in self.locations])
+
 
 def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
     persons = {}
@@ -88,14 +91,25 @@ def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
 
 
 def persons_list_to_html(persons: List[Person]) -> str:
-    df = pd.DataFrame()
+    df = pd.DataFrame(
+        [
+            (
+                p.get_html_name(),
+                p.name,
+                p.appeared,
+                p.get_html_locations(),
+                p.description,
+            )
+            for p in persons
+        ],
+        columns=["Name", "_name", "Appeared", "Locations", "Description"],
+    )
 
-    df["Name"] = [p.get_html_name() for p in persons]
-    df["_name"] = [p.name for p in persons]
-    df["Description"] = [p.description for p in persons]
     with pd.option_context("display.max_colwidth", -1):
         return (
-            df.sort_values("_name")[["Name", "Description"]]
+            df.sort_values("_name")[
+                [c for c in df.columns if not c.startswith("_")]
+            ]
             .to_html(classes=["datatable"], index=False, escape=False)
             .replace('style="text-align: right;"', "")
         )
