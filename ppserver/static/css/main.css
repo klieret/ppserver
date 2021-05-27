@@ -18,11 +18,15 @@ a {
 .personstable_container {
     width: 80%;
     max-width: 1200px;
+    margin: auto;
+}
+
+.datatable_search {
+
 }
 
 .personstable {
     border-collapse: collapse;
-    margin: auto;
     margin-bottom: 10px;
     font-size: 0.9em;
     font-family: sans-serif;

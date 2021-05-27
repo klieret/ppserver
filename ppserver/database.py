@@ -111,7 +111,7 @@ def persons_list_to_html(persons: List[Person]) -> str:
                 [c for c in df.columns if not c.startswith("_")]
             ]
             .to_html(
-                classes=["personstable"],
+                classes=["personstable", "display"],
                 index=False,
                 escape=False,
                 table_id="persons_table",
