@@ -106,7 +106,7 @@ def persons_list_to_html(persons: List[Person]) -> str:
     )
 
     with pd.option_context("display.max_colwidth", -1):
-        return (
+        html = (
             df.sort_values("_name")[
                 [c for c in df.columns if not c.startswith("_")]
             ]
@@ -118,6 +118,16 @@ def persons_list_to_html(persons: List[Person]) -> str:
             )
             .replace('style="text-align: right;"', "")
         )
+    html = html.replace(
+        "<thead>",
+        "<colgroup>"
+        "<col style='width: 15% !important;'>"
+        "<col style='width: 10% !important;'>"
+        "<col style='width: 10% !important;'>"
+        "<col style='width: 65% !important;'>"
+        "</colgroup><thead>",
+    )
+    return html
 
 
 class DataBase:
