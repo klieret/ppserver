@@ -103,6 +103,8 @@ def persons_list_to_html(persons: List[Person]) -> str:
 
 class DataBase:
     def __init__(self):
+        self._relations_df: pd.DataFrame = None  # type: ignore
+        self._key2info: Dict[str, Person] = None  # type: ignore
         self.reload()
         self.last_reload = datetime.now()
 
