@@ -58,6 +58,7 @@ def get_logger(
 
     return _logger
 
+
 _ADD_LOG_FH_PROPERTY = "_add_log_fh"
 
 
@@ -118,6 +119,7 @@ def lon(log: OL) -> logging.Logger:
         return get_logger("pp")
     else:
         return log
+
 
 logger = get_logger("pp")
 

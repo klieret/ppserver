@@ -32,7 +32,10 @@ setup(
     packages=packages,
     install_requires=requirements,
     url="",
-    project_urls={"Bug Tracker": None, "Source Code": None,},
+    project_urls={
+        "Bug Tracker": None,
+        "Source Code": None,
+    },
     include_package_data=True,
     description=description,
     long_description=long_description,

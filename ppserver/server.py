@@ -3,12 +3,10 @@
 # std
 import logging
 from pathlib import Path
-import json
-from datetime import datetime
 
 # 3rd
 from flask import Flask
-from flask import render_template, redirect, send_file, request
+from flask import render_template
 
 # ours
 from ppserver.database import DataBase
@@ -19,7 +17,9 @@ statics = Path(__file__).resolve().parent / "static"
 
 
 app = Flask(
-    __name__, template_folder=str(templates.resolve()), static_folder=str(statics.resolve())
+    __name__,
+    template_folder=str(templates.resolve()),
+    static_folder=str(statics.resolve()),
 )
 
 db = DataBase()
