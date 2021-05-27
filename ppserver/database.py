@@ -46,6 +46,7 @@ class Person:
         alive=True,
         location: str = "",
         appeared: str = "",
+        race: str = "",
         is_player=False,
     ):
         self.name = name
@@ -53,6 +54,7 @@ class Person:
         self.alive = alive
         self.locations = location.split(",")
         self.appeared = appeared
+        self.race = race
         #: Player or NPC?
         self.is_player = is_player
 
@@ -86,6 +88,7 @@ def df_to_persons(df: pd.DataFrame) -> Dict[str, Person]:
             location=values["Locations"],
             appeared=values["Appeared"],
             is_player="player" in keywords,
+            race=values["Race"],
         )
     return persons
 
@@ -96,13 +99,21 @@ def persons_list_to_html(persons: List[Person]) -> str:
             (
                 p.get_html_name(),
                 p.name,
-                p.appeared,
+                p.race,
                 p.get_html_locations(),
+                p.appeared,
                 p.description,
             )
             for p in persons
         ],
-        columns=["Name", "_name", "Appeared", "Locations", "Description"],
+        columns=[
+            "Name",
+            "_name",
+            "Race",
+            "Locations",
+            "Appeared",
+            "Description",
+        ],
     )
 
     with pd.option_context("display.max_colwidth", -1):
@@ -124,7 +135,8 @@ def persons_list_to_html(persons: List[Person]) -> str:
         "<col style='width: 15% !important;'>"
         "<col style='width: 10% !important;'>"
         "<col style='width: 10% !important;'>"
-        "<col style='width: 65% !important;'>"
+        "<col style='width: 10% !important;'>"
+        "<col style='width: 55% !important;'>"
         "</colgroup><thead>",
     )
     return html
