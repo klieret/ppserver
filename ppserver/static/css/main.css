@@ -15,7 +15,12 @@ a {
     text-align: center;
 }
 
-.datatable {
+.personstable_container {
+    width: 80%;
+    max-width: 800px;
+}
+
+.personstable {
     border-collapse: collapse;
     margin: auto;
     margin-bottom: 10px;
@@ -24,32 +29,30 @@ a {
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     table-layout: fixed;
-    width: 80%;
-    max-width: 800px;
     border: none;
 }
 
-.datatable thead tr {
+.personstable thead tr {
     background-color: #009879;
     color: #ffffff;
     text-align: left;
 }
 
-.datatable th,
-.datatable td {
+.personstable th,
+.personstable td {
     padding: 12px 15px;
     border: none;
 }
 
-.datatable tbody tr {
+.personstable tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-.datatable tbody tr:nth-of-type(even) {
+.personstable tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
-.datatable tbody tr:last-of-type {
+.personstable tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
 

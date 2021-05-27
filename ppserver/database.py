@@ -97,7 +97,7 @@ def persons_list_to_html(persons: List[Person]) -> str:
         return (
             df.sort_values("_name")[["Name", "Description"]]
             .to_html(
-                classes=["datatable"],
+                classes=["personstable"],
                 index=False,
                 escape=False,
                 table_id="persons_table",

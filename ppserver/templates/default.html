@@ -19,7 +19,7 @@
 
 <div id="mynetwork" style="width: 100%; height: 90%;" class="vis-network"></div>
 
-<div id="persons">{{persons_table|safe}}</div>
+<div id="persons" class="personstable_container">{{persons_table|safe}}</div>
 <div id="persons_stats" class="center">This table lists {{n_persons}} characters. There are {{n_connections}} connections shown in the graph above.</div>
 
 <script type="text/javascript">
@@ -34,7 +34,9 @@
 
 <script type="text/javascript">
   $(document).ready( function () {
-    $('#persons_table').DataTable();
+    $('#persons_table').DataTable({
+        paging: false
+    });
 } );
 </script>
 
