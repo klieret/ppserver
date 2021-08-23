@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
-
 # std
 from typing import Tuple, List, Dict
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 # 3rd
 import pandas as pd
@@ -11,8 +9,8 @@ import gspread
 from diskcache import Cache
 
 # ours
-
 from ppserver.log import logger
+from ppserver.config import config
 
 cache = Cache("data")
 
@@ -20,10 +18,7 @@ cache = Cache("data")
 @cache.memoize()
 def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
     logger.debug("Authorizing to google")
-    filename = (
-        Path(__file__).parent
-        / "../private_data/pen-and-paper-309915-e61473bc4e7a.json"
-    )
+    filename = Path(config["certificate_path"])
     assert filename.is_file()
     gc = gspread.service_account(filename=str(filename.resolve()))
 
@@ -153,7 +148,7 @@ class DataBase:
         if force:
             cache.clear()
         self._relations_df, _persons_df = load_from_google(
-            ("relations", "characters")
+            (config["relations_sheet_name"], config["character_sheet_name"])
         )
         self._key2info = df_to_persons(_persons_df)
         if force:

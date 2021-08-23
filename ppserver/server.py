@@ -10,6 +10,7 @@ from flask import render_template
 
 # ours
 from ppserver.database import DataBase
+from ppserver.config import config
 
 
 templates = Path(__file__).resolve().parent / "templates"
@@ -42,6 +43,8 @@ def root():
         not_reloaded_since=db.last_reload.strftime("%b %d %Y %H:%M:%S"),
         n_persons=db.n_persons,
         n_connections=db.n_connections,
+        character_sheet_link=config["character_sheet_link"],
+        relations_sheet_link=config["relations_sheet_link"],
     )
 
 
