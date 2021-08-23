@@ -6,7 +6,7 @@ import yaml
 
 
 class Config:
-    def __init__(self, config_file=Path("~/.ppserver").expanduser()):
+    def __init__(self, config_file=Path("~/.ppserver.yaml").expanduser()):
         # All settings MUST be listed here
         # None stands for "no default value available"
         self.settings_default = {

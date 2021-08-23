@@ -48,7 +48,7 @@ Follow [these instructions](https://docs.gspread.org/en/latest/oauth2.html#enabl
 
 ### Config file
 
-Place the following file at `~/.ppserver.json`:
+Place the following file at `~/.ppserver.yaml`:
 
 ```yaml
 # "share with edit rights" link to the characters sheet
