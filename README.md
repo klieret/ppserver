@@ -32,14 +32,14 @@ The following keywords are allowed:
 
 This table lists the relationships between characters. It should have the following columns:
 
-1. Actor (who is the relationship originating from)
-2. Relation (what is the relation)
-3. Target (target of the the relation)
-4. Extra (additional keywords, comma separated if more than one)
+1. `Actor` (who is the relationship originating from)
+2. `Relation` (what is the relation)
+3. `Target` (target of the the relation)
+4. `Extra` (additional keywords, comma separated if more than one)
 
 The following keywords are allowed:
 
-* bi (draw a bidirectional arrow rather than a normal arrow pointing from actor to target)
+* `bi` (draw a bidirectional arrow rather than a normal arrow pointing from actor to target)
 
 ### Google API
 
