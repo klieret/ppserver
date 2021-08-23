@@ -19,7 +19,7 @@ cache = Cache("data")
 def load_from_google(names: Tuple[str, ...]) -> List[pd.DataFrame]:
     logger.debug("Authorizing to google")
     filename = Path(config["certificate_path"])
-    assert filename.is_file()
+    assert filename.is_file(), filename
     gc = gspread.service_account(filename=str(filename.resolve()))
 
     logger.debug("Authorization granted")
