@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # std
 from distutils.core import setup
 
