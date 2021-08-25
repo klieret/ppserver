@@ -4,6 +4,10 @@
 
 `ppserver` is a small [`flask`](https://flask.palletsprojects.com/) server that helps to keep track of story lines and characters ([NPCs](https://en.wikipedia.org/wiki/Non-player_character)) in my [pen & paper game](https://en.wikipedia.org/wiki/Tabletop_role-playing_game). The underlying data is collaboratively maintained in google sheets.
 
+## Video
+
+[![video screenshot](readme_assets/video.png)](https://www.youtube.com/watch?v=Bz6TbnL1mEU)
+
 ## Setup
 
 ### Installing this package
