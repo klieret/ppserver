@@ -12,6 +12,8 @@
 
 ### Installing this package
 
+Clone the repository and run
+
 ```python3
 pip3 install -e .
 ```
@@ -53,6 +55,9 @@ The following keywords are allowed:
 
 Follow [these instructions](https://docs.gspread.org/en/latest/oauth2.html#enable-api-access-for-a-project). This involves two steps:
 
+* Creating the certificate json file and downloading it to your computer
+* Sharing the google sheets with the email address from your service account
+
 
 ### Config file
 
@@ -70,3 +75,9 @@ relations_sheet_name: relations
 # path to your certificate file
 certificate_path: /home/X/Y/Z/pen-and-paper-xxxxxx-yyyyyyyyyyyy.json
 ```
+
+## License
+
+MIT license [![License](https://img.shields.io/github/license/klieret/ppserver.svg)](https://github.com/klieret/ppserver/blob/master/LICENSE.txt).
+
+This repository contains `vis-network.min.js` from the [vis-network](https://github.com/visjs/vis-network) project. Its MIT license is tracked as `vis_js_license.txt`.
