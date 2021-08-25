@@ -1,5 +1,9 @@
 # ppserver
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/klieret/ppserver/master.svg)](https://results.pre-commit.ci/latest/github/klieret/ppserver/master) [![PR welcome](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project) [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black) [![License](https://img.shields.io/github/license/klieret/ppserver.svg)](https://github.com/klieret/ppserver/blob/master/LICENSE.txt)
+
+`ppserver` is a small [`flask`](https://flask.palletsprojects.com/) server that helps to keep track of story lines and characters ([NPCs](https://en.wikipedia.org/wiki/Non-player_character)) in my [pen & paper game](https://en.wikipedia.org/wiki/Tabletop_role-playing_game). The underlying data is collaboratively maintained in google sheets.
+
 ## Setup
 
 ### Installing this package
