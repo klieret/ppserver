@@ -45,3 +45,6 @@ repos:
         args: ["--py36-plus"]
 
 exclude: "ppserver/static/js/vis-network.min.js"
+
+ci:
+    autoupdate_schedule: monthly
