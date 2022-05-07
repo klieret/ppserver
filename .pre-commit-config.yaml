@@ -47,4 +47,4 @@ repos:
 exclude: "ppserver/static/js/vis-network.min.js"
 
 ci:
-    autoupdate_schedule: monthly
+    autoupdate_schedule: quarterly
