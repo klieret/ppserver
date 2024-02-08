@@ -111,7 +111,7 @@ def persons_list_to_html(persons: List[Person]) -> str:
         ],
     )
 
-    with pd.option_context("display.max_colwidth", -1):
+    with pd.option_context("display.max_colwidth", None):
         html = (
             df.sort_values("_name")[
                 [c for c in df.columns if not c.startswith("_")]
