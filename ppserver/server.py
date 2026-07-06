@@ -12,7 +12,6 @@ from flask import render_template
 from ppserver.database import DataBase
 from ppserver.config import config
 
-
 templates = Path(__file__).resolve().parent / "templates"
 statics = Path(__file__).resolve().parent / "static"
 
