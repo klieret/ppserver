@@ -8,7 +8,6 @@ from typing import Union, Optional
 # 3rd
 import colorlog
 
-
 OL = Optional[logging.Logger]
 
 
